@@ -60,5 +60,21 @@ public interface Environment extends RemoteEnvironment {
      */
     PersistenceContextReferenceMetaData getPersistenceContextReferenceByName(String name);
 
+    /**
+     * Get the persistenceContextRefs.
+     *
+     * @return the persistenceContextRefs.
+     */
+    ContextServicesMetaData getContextServices();
+
+    /**
+     * Get by name
+     *
+     * @param name the name
+     * @return the result or null if not found
+     * @throws IllegalArgumentException for a null name
+     */
+    ContextServiceMetaData getContextServiceByName(String name);
+
 
 }

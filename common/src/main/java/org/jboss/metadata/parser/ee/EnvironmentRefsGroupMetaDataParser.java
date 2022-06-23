@@ -27,6 +27,7 @@ import javax.xml.stream.XMLStreamReader;
 
 import org.jboss.metadata.javaee.spec.AdministeredObjectsMetaData;
 import org.jboss.metadata.javaee.spec.ConnectionFactoriesMetaData;
+import org.jboss.metadata.javaee.spec.ContextServicesMetaData;
 import org.jboss.metadata.javaee.spec.DataSourcesMetaData;
 import org.jboss.metadata.javaee.spec.EJBLocalReferencesMetaData;
 import org.jboss.metadata.javaee.spec.EJBReferencesMetaData;
@@ -76,6 +77,14 @@ public class EnvironmentRefsGroupMetaDataParser {
                     env.setPersistenceContextRefs(pcReferences);
                 }
                 pcReferences.add(PersistenceContextReferenceMetaDataParser.parse(reader, propertyReplacer));
+                break;
+            case CONTEXT_SERVICE:
+                ContextServicesMetaData contextServices = env.getContextServices();
+                if (contextServices == null) {
+                    contextServices = new ContextServicesMetaData();
+                    env.setContextServices(contextServices);
+                }
+                contextServices.add(ContextServicesMetaDataParser.parse(reader, propertyReplacer));
                 break;
             default:
                 return parseRemote(reader, env, propertyReplacer);

@@ -1109,4 +1109,26 @@
         </locale-encoding-mapping>
     </locale-encoding-mapping-list>
 
+    <context-service id="contextService1">
+        <description xml:lang="fr">contextService1</description>
+        <name>contextService1Name</name>
+        <cleared></cleared>
+        <propagated></propagated>
+        <unchanged></unchanged>
+        <property id="contextService1Property-id">
+            <name>contextService1Property-Name</name>
+            <value>contextService1Property-Value</value>
+        </property>
+    </context-service>
+    <context-service id="contextService2">
+        <description xml:lang="de">contextService2</description>
+        <name>contextService2Name</name>
+        <cleared>contextService2Cleared</cleared>
+        <propagated>contextService2Propagated</propagated>
+        <unchanged>contextService2Unchanged</unchanged>
+        <property id="contextService2Property-id">
+            <name>contextService2Property-Name</name>
+            <value>contextService2Property-Value</value>
+        </property>
+    </context-service>
 </web-app>

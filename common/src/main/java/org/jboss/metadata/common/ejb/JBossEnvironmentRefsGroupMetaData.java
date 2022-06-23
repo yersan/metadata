@@ -24,6 +24,8 @@ package org.jboss.metadata.common.ejb;
 import java.io.Serializable;
 
 import org.jboss.metadata.javaee.jboss.JBossServiceReferencesMetaData;
+import org.jboss.metadata.javaee.spec.ContextServiceMetaData;
+import org.jboss.metadata.javaee.spec.ContextServicesMetaData;
 import org.jboss.metadata.javaee.spec.EJBLocalReferenceMetaData;
 import org.jboss.metadata.javaee.spec.EJBLocalReferencesMetaData;
 import org.jboss.metadata.javaee.spec.Environment;
@@ -58,6 +60,11 @@ public class JBossEnvironmentRefsGroupMetaData extends RemoteEnvironmentRefsGrou
      * The persistence context reference
      */
     private PersistenceContextReferencesMetaData persistenceContextRefs;
+
+    /**
+     * The context services
+     */
+    private ContextServicesMetaData contextServices;
 
     @Override
     public EJBLocalReferenceMetaData getEjbLocalReferenceByName(String name) {
@@ -103,4 +110,20 @@ public class JBossEnvironmentRefsGroupMetaData extends RemoteEnvironmentRefsGrou
         this.persistenceContextRefs = persistenceContextRefs;
     }
 
+    @Override
+    public ContextServicesMetaData getContextServices() {
+        return contextServices;
+    }
+
+    @Override
+    public ContextServiceMetaData getContextServiceByName(String name) {
+        ContextServiceMetaData ref = null;
+        if (this.contextServices != null)
+            ref = contextServices.get(name);
+        return ref;
+    }
+
+    public void setContextServices(ContextServicesMetaData contextServices) {
+        this.contextServices = contextServices;
+    }
 }

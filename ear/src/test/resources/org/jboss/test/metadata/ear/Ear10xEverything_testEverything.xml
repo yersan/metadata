@@ -886,4 +886,34 @@
         </resource-adapter>
     </administered-object>
 
+    <context-service id="appContextService1-id">
+        <description>appContextService1Desc</description>
+        <name>appContextService1Name</name>
+        <cleared></cleared>
+        <propagated></propagated>
+        <unchanged></unchanged>
+        <property id="appContextService1Property1-id">
+            <name>appContextService1Property1Name</name>
+            <value>appContextService1Property1Value</value>
+        </property>
+        <property id="appContextService1Property2-id">
+            <name>appContextService1Property2Name</name>
+            <value>appContextService1Property2Value</value>
+        </property>
+    </context-service>
+    <context-service id="appContextService2-id">
+        <description>appContextService2Desc</description>
+        <name>appContextService2Name</name>
+        <cleared>appContextService2Cleared</cleared>
+        <propagated>appContextService2Propagated</propagated>
+        <unchanged>appContextService2Unchanged</unchanged>
+        <property id="xxxxxxxx-id">
+            <name>appContextService1Property1Name</name>
+            <value>appContextService1Property1Value</value>
+        </property>
+        <property id="xxxxxxxx2-id">
+            <name>appContextService1Property2Name</name>
+            <value>appContextService1Property2Value</value>
+        </property>
+    </context-service>
 </application>

@@ -21,6 +21,8 @@
  */
 package org.jboss.metadata.ejb.jboss;
 
+import org.jboss.metadata.javaee.spec.ContextServiceMetaData;
+import org.jboss.metadata.javaee.spec.ContextServicesMetaData;
 import org.jboss.metadata.javaee.spec.PortComponent;
 
 /**

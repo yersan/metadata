@@ -50,6 +50,11 @@ public class EnvironmentRefsGroupMetaData extends RemoteEnvironmentRefsGroupMeta
     private PersistenceContextReferencesMetaData persistenceContextRefs;
 
     /**
+     * The context services
+     */
+    private ContextServicesMetaData contextServices;
+
+    /**
      * Get the ejbLocalReferences.
      *
      * @return the ejbLocalReferences.
@@ -111,4 +116,16 @@ public class EnvironmentRefsGroupMetaData extends RemoteEnvironmentRefsGroupMeta
         return AbstractMappedMetaData.getByName(name, persistenceContextRefs);
     }
 
+    public ContextServicesMetaData getContextServices() {
+        return contextServices;
+    }
+
+    @Override
+    public ContextServiceMetaData getContextServiceByName(String name) {
+        return AbstractMappedMetaData.getByName(name, contextServices);
+    }
+
+    public void setContextServices(ContextServicesMetaData contextServices) {
+        this.contextServices = contextServices;
+    }
 }

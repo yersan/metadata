@@ -62,6 +62,7 @@ public class EnvironmentRefsGroupMetaDataMerger extends RemoteEnvironmentRefsGro
         if (persistenceContextRefs != null)
             dest.setPersistenceContextRefs(persistenceContextRefs);
 
+        // Merge context services
 
 
     }
@@ -90,5 +91,6 @@ public class EnvironmentRefsGroupMetaDataMerger extends RemoteEnvironmentRefsGro
                     (mainE != null) ? mainE.getPersistenceContextRefs() : null, resolveConflicts);
         }
 
+        // augment context services
     }
 }

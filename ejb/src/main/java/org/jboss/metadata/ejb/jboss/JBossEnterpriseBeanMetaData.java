@@ -55,6 +55,8 @@ import org.jboss.metadata.javaee.spec.AdministeredObjectsMetaData;
 import org.jboss.metadata.javaee.spec.AnnotatedEJBReferencesMetaData;
 import org.jboss.metadata.javaee.spec.ConnectionFactoriesMetaData;
 import org.jboss.metadata.javaee.spec.ConnectionFactoryMetaData;
+import org.jboss.metadata.javaee.spec.ContextServiceMetaData;
+import org.jboss.metadata.javaee.spec.ContextServicesMetaData;
 import org.jboss.metadata.javaee.spec.DataSourceMetaData;
 import org.jboss.metadata.javaee.spec.DataSourcesMetaData;
 import org.jboss.metadata.javaee.spec.EJBLocalReferenceMetaData;
@@ -1796,5 +1798,15 @@ public abstract class JBossEnterpriseBeanMetaData extends NamedMetaDataWithDescr
     @Override
     public MailSessionMetaData getMailSessionByName(String name) throws IllegalArgumentException {
         return jndiEnvironmentRefsGroup != null ? jndiEnvironmentRefsGroup.getMailSessionByName(name) : null;
+    }
+
+    @Override
+    public ContextServicesMetaData getContextServices() {
+        return jndiEnvironmentRefsGroup != null ? jndiEnvironmentRefsGroup.getContextServices() : null;
+    }
+
+    @Override
+    public ContextServiceMetaData getContextServiceByName(String name) {
+        return jndiEnvironmentRefsGroup != null ? jndiEnvironmentRefsGroup.getContextServiceByName(name) : null;
     }
 }

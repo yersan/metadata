@@ -39,6 +39,8 @@ import org.jboss.metadata.javaee.spec.AdministeredObjectMetaData;
 import org.jboss.metadata.javaee.spec.AdministeredObjectsMetaData;
 import org.jboss.metadata.javaee.spec.ConnectionFactoriesMetaData;
 import org.jboss.metadata.javaee.spec.ConnectionFactoryMetaData;
+import org.jboss.metadata.javaee.spec.ContextServiceMetaData;
+import org.jboss.metadata.javaee.spec.ContextServicesMetaData;
 import org.jboss.metadata.javaee.spec.DataSourceMetaData;
 import org.jboss.metadata.javaee.spec.DataSourcesMetaData;
 import org.jboss.metadata.javaee.spec.DescriptionGroupMetaData;
@@ -333,6 +335,7 @@ public abstract class AbstractJavaEEEverythingTest extends AbstractJavaEEMetaDat
         if (full) {
             assertPersistenceContextRefs(prefix, 2, environment.getPersistenceContextRefs(), mode, version);
         }
+        assertContextServices(prefix, 2, environment.getContextServices(), mode, version);
     }
 
     protected void assertNullEnvironment(Environment environment) {
@@ -354,6 +357,7 @@ public abstract class AbstractJavaEEEverythingTest extends AbstractJavaEEMetaDat
             assertNull(environment.getJmsConnectionFactories());
             assertNull(environment.getJmsDestinations());
             assertNull(environment.getMailSessions());
+            assertNull(environment.getContextServices());
         }
     }
 
@@ -1060,6 +1064,36 @@ public abstract class AbstractJavaEEEverythingTest extends AbstractJavaEEMetaDat
             assertDescriptions(prefix + "JndiRef" + count, jndiRef.getDescriptions());
             assertEquals(prefix + "JndiRef" + count + "Name", jndiRef.getJndiRefName());
             assertResourceGroupJndiName(prefix + "JndiRef" + count, jndiRef, true, count == 1, mode);
+            ++count;
+        }
+    }
+
+    protected void assertContextServices(String prefix, int size, ContextServicesMetaData contextServicesMetaData, Mode mode, JavaEEVersion version) {
+        prefix = prefix + "ContextService";
+        assertNotNull(contextServicesMetaData);
+        assertEquals(size, contextServicesMetaData.size());
+        int count = 1;
+        for (ContextServiceMetaData contextService : contextServicesMetaData) {
+            assertId(prefix + count, contextService);
+
+            final Descriptions desc = contextService.getDescriptions();
+            Description[] descArr = desc.value();
+            assertNotNull(descArr);
+            assertEquals(1, descArr.length);
+            assertEquals(prefix + count + "Desc", descArr[0].value());
+
+            assertEquals(prefix + count + "Name", contextService.getName());
+            if (count == 1) {
+                assertEquals("", contextService.getCleared());
+                assertEquals("", contextService.getPropagated());
+                assertEquals("", contextService.getUnchanged());
+            } else {
+                assertEquals(prefix + count + "Cleared", contextService.getCleared());
+                assertEquals(prefix + count + "Propagated", contextService.getPropagated());
+                assertEquals(prefix + count + "Unchanged", contextService.getUnchanged());
+            }
+            final PropertiesMetaData properties = contextService.getProperties();
+            assertProperties(prefix + count,2, properties);
             ++count;
         }
     }

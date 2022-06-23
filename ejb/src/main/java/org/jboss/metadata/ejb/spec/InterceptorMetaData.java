@@ -26,6 +26,8 @@ import org.jboss.metadata.javaee.spec.AdministeredObjectsMetaData;
 import org.jboss.metadata.javaee.spec.AnnotatedEJBReferencesMetaData;
 import org.jboss.metadata.javaee.spec.ConnectionFactoriesMetaData;
 import org.jboss.metadata.javaee.spec.ConnectionFactoryMetaData;
+import org.jboss.metadata.javaee.spec.ContextServiceMetaData;
+import org.jboss.metadata.javaee.spec.ContextServicesMetaData;
 import org.jboss.metadata.javaee.spec.DataSourceMetaData;
 import org.jboss.metadata.javaee.spec.DataSourcesMetaData;
 import org.jboss.metadata.javaee.spec.EJBLocalReferenceMetaData;
@@ -204,10 +206,12 @@ public class InterceptorMetaData extends NamedMetaDataWithDescriptions implement
         this.prePassivates = prePassivates;
     }
 
+    @Override
     public EJBLocalReferenceMetaData getEjbLocalReferenceByName(String name) {
         return AbstractMappedMetaData.getByName(name, getEjbLocalReferences());
     }
 
+    @Override
     public EJBLocalReferencesMetaData getEjbLocalReferences() {
         if (environment != null)
             return environment.getEjbLocalReferences();
@@ -252,10 +256,12 @@ public class InterceptorMetaData extends NamedMetaDataWithDescriptions implement
         return null;
     }
 
+    @Override
     public PersistenceContextReferenceMetaData getPersistenceContextReferenceByName(String name) {
         return AbstractMappedMetaData.getByName(name, getPersistenceContextRefs());
     }
 
+    @Override
     public PersistenceContextReferencesMetaData getPersistenceContextRefs() {
         if (environment != null)
             return environment.getPersistenceContextRefs();
@@ -388,6 +394,18 @@ public class InterceptorMetaData extends NamedMetaDataWithDescriptions implement
     @Override
     public MailSessionMetaData getMailSessionByName(String name) throws IllegalArgumentException {
         return environment != null ? environment.getMailSessionByName(name) : null;
+    }
+
+    @Override
+    public ContextServicesMetaData getContextServices() {
+        if (environment != null)
+            return environment.getContextServices();
+        return null;
+    }
+
+    @Override
+    public ContextServiceMetaData getContextServiceByName(String name) {
+        return AbstractMappedMetaData.getByName(name, getContextServices());
     }
 
     /**
